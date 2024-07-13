@@ -27,6 +27,10 @@ public:
     // defined config.ini properties
     static const std::string CONFIG_DB_SOURCE;
     static const std::string CONFIG_DB_TARGET;
+
+    // extensions, separators, etc.
+    static const std::string CSV_EXTENSION;
+    static const std::string UNDERSCORE;
 };
 
 #endif //FILE_IO_H

@@ -3,8 +3,10 @@
 #ifndef GRAPH_IO_H
 #define GRAPH_IO_H
 
+#include <armadillo>
 #include "filereader.hpp"
 #include "filewriter.hpp"
+#include "graphfile.hpp"
 
 class GraphIO {
 
@@ -13,9 +15,7 @@ private:
     FileWriter writer;
 
 public:
-    void generate_name(const std::string old_filename) const;
     void convert() const;
- 
 };
 
 #endif //GRAPH_IO_H
