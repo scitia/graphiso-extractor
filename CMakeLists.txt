@@ -29,9 +29,11 @@ find_package(Boost 1.85 REQUIRED COMPONENTS
 
 set(SOURCES 
     src/main.cpp
+    src/application.cpp
     src/graphio.cpp
     src/graphfilebase.cpp
     src/graphfile.cpp
+    src/graphdata.cpp
     src/fileio.cpp
     src/filereader.cpp
     src/filewriter.cpp

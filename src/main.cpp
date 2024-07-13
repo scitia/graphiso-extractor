@@ -1,10 +1,7 @@
-#include "graphio.hpp"
-
-#include <boost/algorithm/string.hpp>
+#include "application.hpp"
 
 int main() {
 
-    // temporary playground
-    GraphIO graphio;
-    graphio.convert();
+    Application::run();
+    return 0;
 }

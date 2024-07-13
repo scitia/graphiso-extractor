@@ -1,6 +1,6 @@
 #include "filewriter.hpp"
 
-void FileWriter::create_directory(const std::string &parent_path, const std::string &directory_name)
+void FileWriter::create_directory(const std::string &parent_path, const std::string &directory_name) const
 {
         std::filesystem::path target_path(
         parent_path
@@ -15,7 +15,7 @@ void FileWriter::create_directory(const std::string &parent_path, const std::str
     std::filesystem::create_directories(target_path);
 }
 
-void FileWriter::create_required_directories(const std::string &target_path)
+void FileWriter::create_required_directories(const std::string &target_path) const
 {
     std::vector<std::string> bvg_vec {
 		"b03", "b03m", "b06", "b06m", "b09", "b09m"
