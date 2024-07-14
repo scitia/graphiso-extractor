@@ -8,9 +8,14 @@ GraphIO::GraphIO()
     this->target_db_uri = this->reader.read_property(FileIO::CONFIG_DB_TARGET);
 }
 
-void GraphIO::do_preactions() const
+void GraphIO::preactions() const
 {
     this->writer.create_required_directories(this->target_db_uri);
+}
+
+void GraphIO::postactions() const
+{
+    // GTR Files 
 }
 
 void GraphIO::convert() const

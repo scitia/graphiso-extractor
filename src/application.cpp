@@ -3,6 +3,7 @@
 void Application::run()
 {
     GraphIO graphio;
-    graphio.do_preactions();
+    graphio.preactions();
     graphio.convert();
+    graphio.postactions();
 }

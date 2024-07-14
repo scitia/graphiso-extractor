@@ -4,11 +4,13 @@
 #define GRAPH_FILE_H
 
 #include "filereader.hpp"
+#include "filewriter.hpp"
 
 class GraphFileBase : public FileIO {
 
 private:
     FileReader reader;
+    FileWriter writer;
 
     std::string filename;
     std::string relative;
@@ -31,6 +33,7 @@ public:
     const std::string get_source_db_uri() const;
     const std::string get_target_db_uri() const;
     const FileReader get_reader() const;
+    const FileWriter get_writer() const;
 
     // setters
     void set_target_absolute(std::string target_absolute);

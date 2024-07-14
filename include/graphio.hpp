@@ -25,7 +25,8 @@ public:
     static const int ALL_GRAPH_AMOUNT;
 
     GraphIO();
-    void do_preactions() const;
+    void preactions() const;
+    void postactions() const;
     void convert() const;
 
 public:

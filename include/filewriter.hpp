@@ -11,9 +11,8 @@ private:
 
 public:
     void create_required_directories(const std::string& target_path) const;
-
-private:
     void create_directory(const std::string &parent_path, const std::string &directory_name) const;
+    bool create_directories(const std::string &fullpath) const;
 };
 
 #endif //FILE_WRITER_H

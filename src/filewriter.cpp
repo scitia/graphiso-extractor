@@ -15,6 +15,15 @@ void FileWriter::create_directory(const std::string &parent_path, const std::str
     std::filesystem::create_directories(target_path);
 }
 
+bool FileWriter::create_directories(const std::string &fullpath) const
+{
+	std::filesystem::path target_fullpath(fullpath);
+	if (std::filesystem::exists(target_fullpath) && std::filesystem::is_directory(fullpath)) {
+		return false;
+	}
+    return std::filesystem::create_directories(target_fullpath);
+}
+
 void FileWriter::create_required_directories(const std::string &target_path) const
 {
     std::vector<std::string> bvg_vec {

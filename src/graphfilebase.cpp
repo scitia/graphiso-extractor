@@ -62,6 +62,11 @@ const FileReader GraphFileBase::get_reader() const
     return this->reader;
 }
 
+const FileWriter GraphFileBase::get_writer() const
+{
+    return this->writer;
+}
+
 void GraphFileBase::set_target_absolute(std::string target_absolute)
 {
     this->target_absolute = std::move(target_absolute);
