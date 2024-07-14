@@ -4,7 +4,7 @@ void FileWriter::create_directory(const std::string &parent_path, const std::str
 {
         std::filesystem::path target_path(
         parent_path
-        + FileIO::WINDOWS_SEPARATOR
+        + FileIO::UNIX_SEPARATOR
         + directory_name
     );
 
@@ -58,7 +58,7 @@ void FileWriter::create_required_directories(const std::string &target_path) con
 			std::string child = ikey;
 			for (auto const& leaf : ivalue) {
 				std::vector<std::string> parts{ parent, child, leaf };
-				std::string rel_path = boost::algorithm::join(parts, FileIO::WINDOWS_SEPARATOR);
+				std::string rel_path = boost::algorithm::join(parts, FileIO::UNIX_SEPARATOR);
 				create_directory(target_path, rel_path);
 			}
 		}

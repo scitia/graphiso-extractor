@@ -15,7 +15,7 @@ private:
     std::string ordinal;
 
 public:
-    GraphFile(std::filesystem::path& path);
+    GraphFile(std::filesystem::path& path, const std::string source_db_uri, const std::string target_db_uri);
     const std::string build_target_absolute() const;
 };
 

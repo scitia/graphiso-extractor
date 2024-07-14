@@ -6,6 +6,7 @@
 
 #include <armadillo>
 #include <exception>
+#include <boost/log/trivial.hpp>
 #include "filereader.hpp"
 #include "filewriter.hpp"
 #include "graphfile.hpp"
@@ -16,15 +17,21 @@ class GraphIO {
 private:
     FileReader reader;
     FileWriter writer;
+    std::string source_db_uri;
+    std::string target_db_uri;
 
 public:
+
+    static const int ALL_GRAPH_AMOUNT;
+
+    GraphIO();
     void do_preactions() const;
     void convert() const;
 
-private:
+public:
 	unsigned short read_word(FILE* in) const;
     GraphData read_graph(FILE* in) const;
-    GraphData read_graph_file(FILE** in, std::string absolute_path) const;
+    GraphData read_graph_file(std::string absolute_path) const;
 };
 
 #endif //GRAPH_IO_H

@@ -20,6 +20,7 @@ public:
 
     // platform specific constants
     static const std::string WINDOWS_SEPARATOR;
+    static const std::string UNIX_SEPARATOR;
 
     // configuration file name
     static const std::string CONFIG_FILE_PATH;

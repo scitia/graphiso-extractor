@@ -1,6 +1,7 @@
 #include "fileio.hpp"
 
 const std::string FileIO::WINDOWS_SEPARATOR = "\\";
+const std::string FileIO::UNIX_SEPARATOR = "/";
 
 const std::string FileIO::CONFIG_FILE_PATH = "../config.ini";
 

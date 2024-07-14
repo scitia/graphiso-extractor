@@ -1,32 +1,40 @@
 #include "graphio.hpp"
 
+const int GraphIO::ALL_GRAPH_AMOUNT = 145600;
+
+GraphIO::GraphIO()
+{
+    this->source_db_uri = this->reader.read_property(FileIO::CONFIG_DB_SOURCE);
+    this->target_db_uri = this->reader.read_property(FileIO::CONFIG_DB_TARGET);
+}
+
 void GraphIO::do_preactions() const
 {
-    std::string target_path = this->reader.read_property(FileIO::CONFIG_DB_TARGET);
-    this->writer.create_required_directories(target_path);
+    this->writer.create_required_directories(this->target_db_uri);
 }
 
 void GraphIO::convert() const
 {
-    std::string source_path = this->reader.read_property(FileIO::CONFIG_DB_SOURCE);
-
-    FILE* file_ptr;
     GraphData graph;
+    int counter = 0;
 
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(source_path)) {
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(this->source_db_uri)) {
         if (std::filesystem::is_regular_file(entry.path())) {
 
             std::filesystem::path path = entry.path();
-            GraphFile ginfo = GraphFile(path);
-
-            // read graph file
-            graph = read_graph_file(&file_ptr, ginfo.get_source_absolute());
-
-            // save graph adjacency matrix file
-            graph.save_adjacency_matrix(ginfo.get_target_absolute());
-
-            // TODO to implement
-            // log the success of the operation on console
+            GraphFile ginfo = GraphFile(path, this->source_db_uri, this->target_db_uri);
+            
+            try {
+                graph = read_graph_file(ginfo.get_source_absolute());
+                graph.save_adjacency_matrix(ginfo.get_target_absolute());
+                ++counter;
+                std::string processing_info = "Processed graph " + std::to_string(counter) + "/" + std::to_string(this->ALL_GRAPH_AMOUNT);
+                BOOST_LOG_TRIVIAL(info) << processing_info;
+            } catch (std::exception ex) {
+                BOOST_LOG_TRIVIAL(error) << "An error occured during processing graph file";
+                BOOST_LOG_TRIVIAL(error) << ex.what();
+                ginfo.to_string();
+            }
         }
     }
 }
@@ -47,36 +55,33 @@ GraphData GraphIO::read_graph(FILE *in) const
     int i, j;
 
     nodes = read_word(in);
-
     arma::umat matrix(nodes, nodes, arma::fill::zeros);
 
-    for (i = 0; i < nodes; i++)
-    {
-        edges = read_word(in);
-
-        for (j = 0; j < edges; j++)
-        {
+    for(i=0; i<nodes; i++)
+    { 
+        edges=read_word(in);
+        for(j=0; j<edges; j++) { 
             target = read_word(in);
-            matrix.at(i, target) = 1;
+            matrix(i,target) = 1;
         }
     }
 
     return GraphData(nodes, matrix);
 }
 
-GraphData GraphIO::read_graph_file(FILE **in, std::string absolute_path) const
+GraphData GraphIO::read_graph_file(std::string absolute_path) const
 {
-    try {
-	    *in = fopen(absolute_path.c_str(), "rb"); // file is opening in read binary mode
-        if (in == NULL) {
-            throw std::runtime_error("file cannot be opened");
-        }
-        else {
-            return read_graph(*in);
-        }
+    FILE* in = fopen(absolute_path.c_str(), "rb");
+    if (in == NULL) {
+        throw std::runtime_error("File not found exception");
     }
-    catch (std::ifstream::failure e) {
-        std::cerr << "error during reading the file under path: " << absolute_path << std::endl;
-        throw std::runtime_error(e.what());
+
+    try {
+        GraphData graph = read_graph(in);
+        fclose(in);
+        return graph;
+    } catch(...) {
+        fclose(in);
+        throw;
     }
 }

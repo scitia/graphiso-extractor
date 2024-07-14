@@ -15,9 +15,11 @@ private:
     std::string source_absolute;
     std::string target_absolute;
     std::string target_filename;
+    std::string source_db_uri;
+    std::string target_db_uri;
 
 public:
-    GraphFileBase(std::filesystem::path& path);
+    GraphFileBase(std::filesystem::path& path, const std::string source_db_uri, std::string target_db_uri);
     void to_string() const;
 
     // getters for instance
@@ -26,6 +28,8 @@ public:
     const std::string get_source_absolute() const;
     const std::string get_target_absolute() const;
     const std::string get_target_filename() const;
+    const std::string get_source_db_uri() const;
+    const std::string get_target_db_uri() const;
     const FileReader get_reader() const;
 
     // setters
