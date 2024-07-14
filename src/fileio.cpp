@@ -10,3 +10,6 @@ const std::string FileIO::CONFIG_DB_TARGET = "database.target";
 
 const std::string FileIO::CSV_EXTENSION = ".csv";
 const std::string FileIO::UNDERSCORE = "_";
+
+const char* FileIO::READ_BINARY = "rb";
+const char* FileIO::SPLIT_REGEX = "_.";

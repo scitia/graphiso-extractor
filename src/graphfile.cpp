@@ -1,10 +1,10 @@
 #include "graphfile.hpp"
 
 GraphFile::GraphFile(std::filesystem::path &path, const std::string source_db_uri, const std::string target_db_uri) 
-    : GraphFileBase(path, source_db_uri, target_db_uri)
+: GraphFileBase(path, source_db_uri, target_db_uri)
 {
     std::vector<std::string> filename_parts;
-    boost::split(filename_parts, this->get_filename(), boost::is_any_of("_."));
+    boost::split(filename_parts, this->get_filename(), boost::is_any_of(FileIO::SPLIT_REGEX));
 
     this->congruence = filename_parts.at(0);
     this->group = filename_parts.at(1);
@@ -17,7 +17,6 @@ GraphFile::GraphFile(std::filesystem::path &path, const std::string source_db_ur
 
 const std::string GraphFile::build_target_absolute() const
 {
-    // std::string target_uri = this->get_reader().read_property(FileIO::CONFIG_DB_TARGET);
     std::string target_uri = this->get_target_db_uri();
     return target_uri
         .append(this->get_relative())

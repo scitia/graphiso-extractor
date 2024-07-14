@@ -71,7 +71,8 @@ GraphData GraphIO::read_graph(FILE *in) const
 
 GraphData GraphIO::read_graph_file(std::string absolute_path) const
 {
-    FILE* in = fopen(absolute_path.c_str(), "rb");
+    FILE* in = fopen(absolute_path.c_str(), FileIO::READ_BINARY);
+    
     if (in == NULL) {
         throw std::runtime_error("File not found exception");
     }

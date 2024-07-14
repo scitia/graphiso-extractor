@@ -2,7 +2,7 @@
 
 void FileWriter::create_directory(const std::string &parent_path, const std::string &directory_name) const
 {
-        std::filesystem::path target_path(
+	std::filesystem::path target_path(
         parent_path
         + FileIO::UNIX_SEPARATOR
         + directory_name
@@ -41,20 +41,17 @@ void FileWriter::create_required_directories(const std::string &target_path) con
 		{"rand", rnd_vec}
 	};
 
-	std::map<std::string, std::map<std::string, std::vector<std::string>>> calalogue_map {
+	std::map<std::string, std::map<std::string, std::vector<std::string>>> directory_map {
 		{"iso", group_map},
 		{"si2", group_map},
 		{"si4", group_map},
 		{"si6", group_map}
 	};
 
-	std::vector<std::string> test_paths;
-
-	for (auto const& [ekey, evalue] : calalogue_map) {
+	for (auto const& [ekey, evalue] : directory_map) {
 
 		std::string parent = ekey;
 		for (auto const& [ikey, ivalue] : evalue) {
-
 			std::string child = ikey;
 			for (auto const& leaf : ivalue) {
 				std::vector<std::string> parts{ parent, child, leaf };

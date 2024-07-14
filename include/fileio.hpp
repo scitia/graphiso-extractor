@@ -32,6 +32,10 @@ public:
     // extensions, separators, etc.
     static const std::string CSV_EXTENSION;
     static const std::string UNDERSCORE;
+
+    // file handling constants
+    static const char* READ_BINARY;
+    static const char* SPLIT_REGEX;
 };
 
 #endif //FILE_IO_H
