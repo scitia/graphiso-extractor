@@ -4,6 +4,7 @@
 #define APPLICATION_H
 
 #include "graphio.hpp"
+#include "graphconverter.hpp"
 
 class Application {
 

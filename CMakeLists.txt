@@ -32,11 +32,23 @@ set(SOURCES
     src/application.cpp
     src/graphio.cpp
     src/graphfilebase.cpp
+    src/graphcharacteristics.cpp
+    src/groundfile.cpp
     src/graphfile.cpp
     src/graphdata.cpp
     src/fileio.cpp
+    src/gfile.cpp
+    src/vgraphfile.cpp
+    src/greader.cpp
+    src/gwriter.cpp
+    src/groundwriter.cpp
+    src/groundreader.cpp
+    src/graphreader.cpp
+    src/graphwriter.cpp
     src/filereader.cpp
     src/filewriter.cpp
+    src/graphconverter.cpp
+    src/filesystemutils.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

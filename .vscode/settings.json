@@ -68,6 +68,8 @@
         "stdfloat": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "filesystem": "cpp",
+        "shared_mutex": "cpp"
     }
 }

@@ -2,8 +2,14 @@
 
 void Application::run()
 {
-    GraphIO graphio;
-    graphio.preactions();
-    graphio.convert();
-    graphio.postactions();
+    // old version
+    // GraphIO graphio;
+    // graphio.preactions();
+    // graphio.convert();
+    // graphio.postactions();
+
+    GraphConverter converter;
+    converter.preactions();
+    converter.convert();
+    converter.postactions();
 }

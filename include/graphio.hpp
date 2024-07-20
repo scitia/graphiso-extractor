@@ -17,8 +17,9 @@ class GraphIO {
 private:
     FileReader reader;
     FileWriter writer;
-    std::string source_db_uri;
-    std::string target_db_uri;
+    std::string source_db_uri; // in the future change type to std::filesystem::path
+    std::string target_db_uri; // in the future change type to std::filesystem::path
+    std::filesystem::path ground_uri;
 
 public:
 

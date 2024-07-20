@@ -9,7 +9,9 @@
 #include <vector>
 #include <map>
 #include <cassert>
+#include <fstream>
 #include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
 
@@ -29,10 +31,13 @@ public:
     // defined config.ini properties
     static const std::string CONFIG_DB_SOURCE;
     static const std::string CONFIG_DB_TARGET;
+    static const std::string CONFIG_DB_GROUND;
 
     // extensions, separators, etc.
     static const std::string CSV_EXTENSION;
+    static const std::string GTR_EXTENSION;
     static const std::string UNDERSCORE;
+    static const std::string SPACE;
 
     // file handling constants
     static const char* READ_BINARY;

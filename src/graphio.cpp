@@ -6,6 +6,7 @@ GraphIO::GraphIO()
 {
     this->source_db_uri = this->reader.read_property(FileIO::CONFIG_DB_SOURCE);
     this->target_db_uri = this->reader.read_property(FileIO::CONFIG_DB_TARGET);
+    this->ground_uri = std::filesystem::path(this->reader.read_property(FileIO::CONFIG_DB_GROUND));
 }
 
 void GraphIO::preactions() const
