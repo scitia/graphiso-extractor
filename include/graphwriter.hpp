@@ -3,7 +3,7 @@
 #ifndef GRAPH_WRITER_H
 #define GRAPH_WRITER_H
 
-#include "vgraphfile.hpp"
+#include "graphfile.hpp"
 #include "iwriteable.hpp"
 
 class GraphWriter : public IWriteable

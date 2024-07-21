@@ -48,19 +48,15 @@ void GraphConverter::convert()
 {
     reader.set_context(std::make_unique<GraphReader>());
     writer.set_context(std::make_unique<GraphWriter>());
-    // GraphReader* greader = new GraphReader();
-    // GraphWriter* gwriter = new GraphWriter();
-    // reader.set_context(greader);
-    // writer.set_context(gwriter);
 
     int processed = 1;
-    VGraphFile* graph;
+    GraphFile* graph;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_source())) {
         if (std::filesystem::is_regular_file(entry.path())) {
-            graph = new VGraphFile(entry.path());
+            graph = new GraphFile(entry.path());
             try {
-                graph = dynamic_cast<VGraphFile*>(reader.read(*graph));
+                graph = dynamic_cast<GraphFile*>(reader.read(*graph));
                 graph->build_target_absolute(this->resource);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
@@ -68,7 +64,6 @@ void GraphConverter::convert()
             }
 
             try {
-                // this->writer.write(*graph);
                 writer.write(*graph);
                 BOOST_LOG_TRIVIAL(info) << "Graph was processed (" << processed << "/" << 145600 << ")";
             } catch (std::exception ex) {
@@ -80,8 +75,6 @@ void GraphConverter::convert()
         }
     }
     delete graph;
-    // delete greader;
-    // delete gwriter;
     BOOST_LOG_TRIVIAL(info) << "Database was processed";
 }
 

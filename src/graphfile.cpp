@@ -1,6 +1,6 @@
-#include "vgraphfile.hpp"
+#include "graphfile.hpp"
 
-void VGraphFile::build_target_absolute(const ResourceLocation resource)
+void GraphFile::build_target_absolute(const ResourceLocation resource)
 {
     std::string base_path = resource.get_target().string();
 
@@ -24,7 +24,7 @@ void VGraphFile::build_target_absolute(const ResourceLocation resource)
     this->set_target_path(tp);
 }
 
-std::string VGraphFile::build_target_filename() const
+std::string GraphFile::build_target_filename() const
 {
     std::vector<std::string> filename_parts = {
         this->get_characteristics().get_congruence(),
@@ -36,22 +36,22 @@ std::string VGraphFile::build_target_filename() const
     return boost::algorithm::join(filename_parts, FileIO::UNDERSCORE).append(FileIO::CSV_EXTENSION);
 }
 
-const arma::umat VGraphFile::get_matrix() const
+const arma::umat GraphFile::get_matrix() const
 {
     return this->matrix;
 }
 
-const int VGraphFile::get_nodes() const
+const int GraphFile::get_nodes() const
 {
     return this->nodes;
 }
 
-void VGraphFile::set_matrix(arma::umat matrix)
+void GraphFile::set_matrix(arma::umat matrix)
 {
     this->matrix = std::move(matrix);
 }
 
-void VGraphFile::set_nodes(int nodes)
+void GraphFile::set_nodes(int nodes)
 {
     this->nodes = std::move(nodes);
 }

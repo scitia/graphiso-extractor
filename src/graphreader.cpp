@@ -9,7 +9,7 @@ GFile* GraphReader::read(GFile &file) const
     }
 
     try {
-        VGraphFile* graph = dynamic_cast<VGraphFile*>(&file); 
+        GraphFile* graph = dynamic_cast<GraphFile*>(&file); 
         read_graph(in, *graph);
         fclose(in);
         return graph;
@@ -27,7 +27,7 @@ unsigned short GraphReader::read_word(FILE *in) const
     return b1 | (b2 << 8);
 }
 
-void GraphReader::read_graph(FILE *in, VGraphFile &file) const
+void GraphReader::read_graph(FILE *in, GraphFile &file) const
 {
     int nodes, edges, target;
 

@@ -34,7 +34,7 @@ set(SOURCES
     src/groundfile.cpp
     src/fileio.cpp
     src/gfile.cpp
-    src/vgraphfile.cpp
+    src/graphfile.cpp
     src/greader.cpp
     src/gwriter.cpp
     src/groundwriter.cpp

@@ -4,7 +4,7 @@
 #define GRAPH_CONVERTER_H
 
 #include "groundfile.hpp"
-#include "vgraphfile.hpp"
+#include "graphfile.hpp"
 #include "greader.hpp"
 #include "gwriter.hpp"
 #include "graphreader.hpp"
