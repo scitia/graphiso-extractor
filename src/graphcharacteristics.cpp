@@ -58,5 +58,5 @@ void GraphCharacteristics::decompose_path(const std::filesystem::path path)
     this->congruence = filename_parts.at(0);
     this->group = filename_parts.at(1);
     this->size = filename_parts.at(2);
-    this->identifier = path.extension().string().substr(1);
+    this->identifier = path.extension().string().substr(2);
 }

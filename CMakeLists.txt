@@ -49,6 +49,7 @@ set(SOURCES
     src/filewriter.cpp
     src/graphconverter.cpp
     src/filesystemutils.cpp
+    src/resourcelocation.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

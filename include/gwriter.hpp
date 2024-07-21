@@ -13,8 +13,9 @@ class GWriter
 private:
     std::unique_ptr<IWriteable> gcontext;
 public:
-    explicit GWriter(std::unique_ptr<IWriteable> &&gcontext = {}) : gcontext(std::move(gcontext)){};
-    void set_context(std::unique_ptr<IWriteable> &&gcontext);
+    GWriter(){};
+    GWriter(std::unique_ptr<IWriteable> &gcontext);
+    void set_context(std::unique_ptr<IWriteable> &gcontext);
     bool write(GFile &file) const;
 };
 

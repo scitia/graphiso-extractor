@@ -2,40 +2,42 @@
 
 GraphConverter::GraphConverter()
 {
-   this->source_db_uri = std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_SOURCE));
-   this->target_db_uri = std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_TARGET));
-   this->ground_db_uri = std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_GROUND));
+   this->resource.set_source(std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_SOURCE)));
+   this->resource.set_target(std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_TARGET)));
+   this->resource.set_ground(std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_GROUND)));
 }
 
 void GraphConverter::preactions() const
 {
-    create_required_directories(this->target_db_uri);
+    create_required_directories(this->resource.get_target());
     BOOST_LOG_TRIVIAL(info) << "Required directories structure was created";
 }
 
 void GraphConverter::postactions()
 {
-    reader.set_context(std::make_unique<GroundReader>());
-    writer.set_context(std::make_unique<GroundWriter>());
+    // reader.set_context(std::make_unique<GroundReader>());
+    // writer.set_context(std::make_unique<GroundWriter>());
 
-    GFile ground;
+    GroundFile* ground;
 
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(this->ground_db_uri)) {
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_ground())) {
         if (std::filesystem::is_regular_file(entry.path())) {
-            ground = GroundFile(entry.path());
+            ground = new GroundFile(entry.path());
             try {
-                this->reader.read(ground);
+                ground = dynamic_cast<GroundFile*>(this->reader.read(*ground));
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading ground-truth file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
             try {
-                this->writer.write(ground);
+                this->writer.write(*ground);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing ground-truth file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
+
+            delete ground;
         }
     }
 
@@ -44,40 +46,43 @@ void GraphConverter::postactions()
 
 void GraphConverter::convert()
 {
-    reader.set_context(std::make_unique<GraphReader>());
-    writer.set_context(std::make_unique<GraphWriter>());
+    // reader.set_context(std::make_unique<GraphReader>());
+    // writer.set_context(std::make_unique<GraphWriter>());
+    GraphReader* greader = new GraphReader();
+    GraphWriter* gwriter = new GraphWriter();
+    // reader.set_context(greader);
+    // writer.set_context(gwriter);
 
-    GFile graph;
+    int processed = 1;
+    VGraphFile* graph;
 
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(this->ground_db_uri)) {
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_source())) {
         if (std::filesystem::is_regular_file(entry.path())) {
-            graph = GroundFile(entry.path());
+            graph = new VGraphFile(entry.path());
             try {
-                this->reader.read(graph);
+                graph = dynamic_cast<VGraphFile*>(greader->read(*graph));
+                graph->build_target_absolute(this->resource);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
             try {
-                this->writer.write(graph);
+                // this->writer.write(*graph);
+                gwriter->write(*graph);
+                BOOST_LOG_TRIVIAL(info) << "Graph was processed (" << processed << "/" << 145600 << ")";
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
+
+            ++processed;
         }
     }
-
+    delete graph;
+    delete greader;
+    delete gwriter;
     BOOST_LOG_TRIVIAL(info) << "Database was processed";
-}
-
-void GraphConverter::base_procedure(std::filesystem::path path, std::function<void(std::filesystem::path path)> procedure)
-{
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(path)) {
-        if (std::filesystem::is_regular_file(entry.path())) {
-            procedure(entry.path());
-        }
-    }
 }
 
 void GraphConverter::create_required_directories(std::filesystem::path path) const
@@ -121,7 +126,7 @@ void GraphConverter::create_required_directories(std::filesystem::path path) con
 			for (auto const& leaf : ivalue) {
 				std::vector<std::string> parts{ parent, child, leaf };
 				std::string rel_path = boost::algorithm::join(parts, FileIO::UNIX_SEPARATOR);
-				this->fs_utils.create_directory(path, rel_path);
+                FilesystemUtils::create_directory(path, rel_path);
 			}
 		}
 	}

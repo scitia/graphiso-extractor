@@ -10,8 +10,8 @@
 class FilesystemUtils
 {  
 public:
-    bool create_directory(std::filesystem::path path, std::string directory_name) const;
-    bool create_directories(std::filesystem::path path) const;
+    static bool create_directory(std::filesystem::path path, std::string directory_name);
+    static bool create_directories(std::filesystem::path path);
 };
 
 

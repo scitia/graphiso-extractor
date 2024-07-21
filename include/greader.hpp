@@ -10,12 +10,12 @@
 class GReader
 {
 private:
-    std::unique_ptr<IReadable> gcontext;
+    IReadable* gcontext;
 public:
-    explicit GReader(std::unique_ptr<IReadable> &&gcontext = {}) : gcontext(std::move(gcontext)){};
-    void set_context(std::unique_ptr<IReadable> &&gcontext);
-    GFile read(GFile &file) const;
+    GReader(){};
+    GReader(IReadable &gcontext);
+    void set_context(IReadable &gcontext);
+    GFile* read(GFile &file) const;
 };
-
 
 #endif //G_READER_H

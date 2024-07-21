@@ -4,11 +4,12 @@
 #define GRAOUND_READER_H
 
 #include "ireadable.hpp"
+#include "groundfile.hpp"
 
 class GroundReader : public IReadable
 {
 public:
-    virtual GFile read(GFile &file);
+    virtual GFile* read(GFile &file);
 private:
 };
 

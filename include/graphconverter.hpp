@@ -11,6 +11,7 @@
 #include "graphwriter.hpp"
 #include "groundreader.hpp"
 #include "groundwriter.hpp"
+#include "resourcelocation.hpp"
 #include "filesystemutils.hpp"
 #include "filereader.hpp"
 #include <boost/log/trivial.hpp>
@@ -23,10 +24,8 @@ private:
     GReader reader;
     GWriter writer;
     FileReader config;
-    FilesystemUtils fs_utils;
-    std::filesystem::path source_db_uri;
-    std::filesystem::path target_db_uri;
-    std::filesystem::path ground_db_uri;
+    // FilesystemUtils fs_utils;
+    ResourceLocation resource;
 
 public:
     GraphConverter();
@@ -34,7 +33,6 @@ public:
     void postactions();
     void convert();
 private:
-    void base_procedure(std::filesystem::path path, std::function<void(std::filesystem::path path)> procedure);
     void create_required_directories(std::filesystem::path path) const;
 };
 

@@ -1,12 +1,16 @@
 #include "greader.hpp"
 
-void GReader::set_context(std::unique_ptr<IReadable> &&gcontext)
+GReader::GReader(IReadable &gcontext)
 {
-    gcontext = std::move(gcontext);
+    this->gcontext = &gcontext;
 }
 
-GFile GReader::read(GFile &file) const
+void GReader::set_context(IReadable &gcontext)
 {
-    assert(gcontext);
+    this->gcontext = &gcontext;
+}
+
+GFile* GReader::read(GFile &file) const
+{
     return gcontext->read(file);
 }

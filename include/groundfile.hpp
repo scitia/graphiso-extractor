@@ -4,15 +4,24 @@
 #define GROUND_FILE_H
 
 #include "gfile.hpp"
+#include "itargetable.hpp"
 #include <map>
 
-class GroundFile : public GFile
+class GroundFile : public GFile//, public ITargetable
 {
 private:
     std::map<std::string, int> adjacencies;
 
 public:
-    GroundFile(const std::filesystem::path path); 
+    GroundFile() {}; // to delete after full implementation
+    GroundFile(const std::filesystem::path path) : GFile(path) {};
+
+    virtual void build_target_absolute(const ResourceLocation resource) override;
+    virtual std::string build_target_filename() const override;
+
+    // getters, setters
+    const std::map<std::string, int> get_adjacencies() const;
+    void set_adjacencies(std::map<std::string, int> adjacencies);
 };
 
 

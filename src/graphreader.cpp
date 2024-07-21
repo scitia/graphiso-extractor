@@ -1,6 +1,6 @@
 #include "graphreader.hpp"
 
-GFile GraphReader::read(GFile &file)
+GFile* GraphReader::read(GFile &file)
 {
     FILE* in = fopen(file.absolute().string().c_str(), "rb");
     
@@ -12,7 +12,7 @@ GFile GraphReader::read(GFile &file)
         VGraphFile* graph = dynamic_cast<VGraphFile*>(&file); 
         read_graph(in, *graph);
         fclose(in);
-        return *graph;
+        return graph;
     } catch(...) {
         fclose(in);
         throw;
@@ -45,6 +45,4 @@ void GraphReader::read_graph(FILE *in, VGraphFile &file) const
 
     file.set_matrix(matrix);
     file.set_nodes(nodes);
-
-    // return file;
 }
