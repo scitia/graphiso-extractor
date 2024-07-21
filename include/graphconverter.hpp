@@ -13,7 +13,7 @@
 #include "groundwriter.hpp"
 #include "resourcelocation.hpp"
 #include "filesystemutils.hpp"
-#include "filereader.hpp"
+#include "inireader.hpp"
 #include <boost/log/trivial.hpp>
 #include <filesystem>
 #include <functional>
@@ -23,7 +23,7 @@ class GraphConverter
 private:
     GReader reader;
     GWriter writer;
-    FileReader config;
+    INIReader config;
     ResourceLocation resource;
 
 public:
@@ -34,6 +34,5 @@ public:
 private:
     void create_required_directories(std::filesystem::path path) const;
 };
-
 
 #endif //GRAPH_CONVERTER_H

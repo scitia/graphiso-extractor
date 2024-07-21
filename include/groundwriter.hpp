@@ -11,5 +11,4 @@ public:
     virtual bool write(GFile &file) const override;
 };
 
-
 #endif //GROUND_WRITER_H

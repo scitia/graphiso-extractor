@@ -5,7 +5,6 @@
 
 #include "gfile.hpp"
 #include "filesystemutils.hpp"
-#include "itargetable.hpp"
 #include <armadillo>
 
 class VGraphFile : public GFile

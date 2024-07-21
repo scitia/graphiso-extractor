@@ -13,5 +13,4 @@ public:
 private:
 };
 
-
 #endif //GRAOUND_READER_H

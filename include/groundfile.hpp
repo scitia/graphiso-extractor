@@ -4,7 +4,6 @@
 #define GROUND_FILE_H
 
 #include "gfile.hpp"
-#include "itargetable.hpp"
 #include <map>
 
 class GroundFile : public GFile//, public ITargetable
