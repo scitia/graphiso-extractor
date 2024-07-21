@@ -9,7 +9,7 @@
 class GroundReader : public IReadable
 {
 public:
-    virtual GFile* read(GFile &file);
+    virtual GFile* read(GFile &file) const;
 private:
 };
 

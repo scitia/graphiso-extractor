@@ -1,6 +1,6 @@
 #include "graphreader.hpp"
 
-GFile* GraphReader::read(GFile &file)
+GFile* GraphReader::read(GFile &file) const
 {
     FILE* in = fopen(file.absolute().string().c_str(), "rb");
     

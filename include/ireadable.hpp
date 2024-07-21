@@ -9,7 +9,7 @@ class IReadable
 {
 public:
     virtual ~IReadable() = default;
-    virtual GFile* read(GFile &file) = 0;
+    virtual GFile* read(GFile &file) const = 0;
 };
 
 

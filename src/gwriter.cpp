@@ -1,17 +1,12 @@
 #include "gwriter.hpp"
 
-GWriter::GWriter(std::unique_ptr<IWriteable> &gcontext)
+void GWriter::set_context(std::unique_ptr<IWriteable> &&context)
 {
-    this->gcontext = std::move(gcontext);
-}
-
-void GWriter::set_context(std::unique_ptr<IWriteable> &gcontext)
-{
-    this->gcontext = std::move(gcontext);
+    this->context = std::move(context);
 }
 
 bool GWriter::write(GFile &file) const
 {
-    assert(this->gcontext);
-    return this->gcontext->write(file);
+    assert(this->context);
+    return this->context->write(file);
 }

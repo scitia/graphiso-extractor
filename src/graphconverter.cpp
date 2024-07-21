@@ -15,8 +15,8 @@ void GraphConverter::preactions() const
 
 void GraphConverter::postactions()
 {
-    // reader.set_context(std::make_unique<GroundReader>());
-    // writer.set_context(std::make_unique<GroundWriter>());
+    reader.set_context(std::make_unique<GroundReader>());
+    writer.set_context(std::make_unique<GroundWriter>());
 
     GroundFile* ground;
 
@@ -46,10 +46,10 @@ void GraphConverter::postactions()
 
 void GraphConverter::convert()
 {
-    // reader.set_context(std::make_unique<GraphReader>());
-    // writer.set_context(std::make_unique<GraphWriter>());
-    GraphReader* greader = new GraphReader();
-    GraphWriter* gwriter = new GraphWriter();
+    reader.set_context(std::make_unique<GraphReader>());
+    writer.set_context(std::make_unique<GraphWriter>());
+    // GraphReader* greader = new GraphReader();
+    // GraphWriter* gwriter = new GraphWriter();
     // reader.set_context(greader);
     // writer.set_context(gwriter);
 
@@ -60,7 +60,7 @@ void GraphConverter::convert()
         if (std::filesystem::is_regular_file(entry.path())) {
             graph = new VGraphFile(entry.path());
             try {
-                graph = dynamic_cast<VGraphFile*>(greader->read(*graph));
+                graph = dynamic_cast<VGraphFile*>(reader.read(*graph));
                 graph->build_target_absolute(this->resource);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
@@ -69,7 +69,7 @@ void GraphConverter::convert()
 
             try {
                 // this->writer.write(*graph);
-                gwriter->write(*graph);
+                writer.write(*graph);
                 BOOST_LOG_TRIVIAL(info) << "Graph was processed (" << processed << "/" << 145600 << ")";
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing graph file";
@@ -80,8 +80,8 @@ void GraphConverter::convert()
         }
     }
     delete graph;
-    delete greader;
-    delete gwriter;
+    // delete greader;
+    // delete gwriter;
     BOOST_LOG_TRIVIAL(info) << "Database was processed";
 }
 

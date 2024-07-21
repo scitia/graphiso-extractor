@@ -24,7 +24,6 @@ private:
     GReader reader;
     GWriter writer;
     FileReader config;
-    // FilesystemUtils fs_utils;
     ResourceLocation resource;
 
 public:
