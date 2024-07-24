@@ -1,36 +1,54 @@
 #include "groundwriter.hpp"
 
-// std::map<std::string, int> FileReader::read_text(const std::filesystem::path &path) const
-// {
-//     if (!std::filesystem::exists(path) || 
-//         !std::filesystem::is_regular_file(path) || 
-//         !path.has_extension() || 
-//         path.extension() != FileIO::GTR_EXTENSION) {
-//         throw std::runtime_error("Incorrect file path! " + path.string());
-//     }
-
-//     std::fstream fground_truth;
-
-//     std::map<std::string, int> gtr_key_value_map;
-
-//     fground_truth.open(path.string(), std::ios::in);
-//     if (fground_truth.is_open()) {
-//         std::string single_ground_truth;
-//         while(std::getline(fground_truth, single_ground_truth)) {
-//             std::vector<std::string> gtr;
-//             boost::split(gtr, single_ground_truth, boost::is_any_of(" "));
-//             assert(gtr.size() == 2);
-//             std::string graph_id = gtr.at(0);
-//             int congruent_elems = std::stoi(gtr.at(1));
-//             gtr_key_value_map.insert({graph_id, congruent_elems});
-//         }
-//         fground_truth.close(); 
-//     }
-
-//     return gtr_key_value_map;
-// }
-
 bool GroundWriter::write(GFile &file) const
 {
-    return false;
+    GroundFile* ground = dynamic_cast<GroundFile*>(&file);
+
+    std::map<std::string, int> adjacencies = ground->get_adjacencies();
+    assert(!adjacencies.empty()); // this code should be moved to abstact validate method
+
+    for (const auto& [filename, adj_amount] : ground->get_adjacencies()) {
+        set_details(*ground, filename);
+        std::string target_path = std::filesystem::absolute(ground->get_target_path()).string();
+        write_single_ground(target_path, adj_amount);
+    }
+
+    delete ground;
+    return true;
+}
+
+void GroundWriter::set_details(GroundFile &file, std::string filename) const
+{
+    // prepare method set characteristics
+    std::pair<std::string, std::string> decomposed = decompose_filename(filename);
+    GraphCharacteristics temp_characteristics = file.get_characteristics();
+    temp_characteristics.set_size(decomposed.first);
+    temp_characteristics.set_identifier(decomposed.second);
+    file.set_characteristics(temp_characteristics);
+    // file.get_characteristics().set_size(decomposed.first);
+    // file.get_characteristics().set_identifier(decomposed.second);
+    file.build_target_absolute();
+}
+
+void GroundWriter::write_single_ground(std::filesystem::path target, int value) const
+{
+    std::fstream ground;
+    ground.open(target.string(), std::fstream::out | std::fstream::app);
+    if (ground.is_open()) {
+        ground << value;
+        ground.close();
+    }
+}
+
+std::pair<std::string, std::string> GroundWriter::decompose_filename(std::string filename) const
+{
+    std::vector<std::string> filename_parts;
+    boost::split(filename_parts, filename, boost::is_any_of(FileIO::SPLIT_REGEX));
+
+    assert(filename_parts.size() == 4);
+
+    std::string size = filename_parts.at(2);
+    std::string identifier = filename_parts.at(3).substr(1);
+
+    return std::make_pair(size, identifier);
 }

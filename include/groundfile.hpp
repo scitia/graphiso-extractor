@@ -14,8 +14,9 @@ private:
 public:
     GroundFile() {}; // to delete after full implementation
     GroundFile(const std::filesystem::path path) : GFile(path) {};
+    GroundFile(const std::filesystem::path path, const ResourceLocation resource) : GFile(path, resource) {};
 
-    virtual void build_target_absolute(const ResourceLocation resource) override;
+    virtual void build_target_absolute() override;
     virtual std::string build_target_filename() const override;
 
     // getters, setters

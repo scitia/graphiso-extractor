@@ -3,7 +3,7 @@
 void Application::run()
 {
     GraphConverter converter;
-    converter.preactions();
-    converter.convert();
-    //converter.postactions();
+    //converter.preactions();
+    //converter.convert();
+    converter.postactions();
 }

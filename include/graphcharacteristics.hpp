@@ -3,6 +3,7 @@
 #ifndef GRAPH_CHARACTERISTICS_H
 #define GRAPH_CHARACTERISTICS_H
 
+#include "fileio.hpp"
 #include <vector>
 #include <cassert>
 #include <filesystem>
@@ -36,6 +37,8 @@ public:
 
 private:
     void decompose_path(const std::filesystem::path path);
+    void decompose_path_graph(const std::filesystem::path path);
+    void decompose_path_ground(const std::filesystem::path path);
 };
 
 #endif //GRAPH_CHARACTERISTICS_H

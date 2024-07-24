@@ -1,12 +1,15 @@
 #include "graphfile.hpp"
 
-void GraphFile::build_target_absolute(const ResourceLocation resource)
+void GraphFile::build_target_absolute()
 {
-    std::string base_path = resource.get_target().string();
+    std::filesystem::path resource_target = this->get_resource().get_target();
+    std::filesystem::path resource_source = this->get_resource().get_source();
+
+    std::string base_path = resource_target.string();
 
     std::string target_path = base_path
         .append(FileIO::UNIX_SEPARATOR)
-        .append(this->relative_toward(resource.get_source()).string())
+        .append(this->relative_toward(resource_source).string())
         .append(FileIO::UNIX_SEPARATOR)
         .append(this->get_characteristics().get_size())
         .append(FileIO::UNIX_SEPARATOR)

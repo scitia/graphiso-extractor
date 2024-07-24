@@ -18,11 +18,12 @@ void GraphConverter::postactions()
     reader.set_context(std::make_unique<GroundReader>());
     writer.set_context(std::make_unique<GroundWriter>());
 
+    int processed = 1;
     GroundFile* ground;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_ground())) {
         if (std::filesystem::is_regular_file(entry.path())) {
-            ground = new GroundFile(entry.path());
+            ground = new GroundFile(entry.path(), this->resource);
             try {
                 ground = dynamic_cast<GroundFile*>(this->reader.read(*ground));
             } catch (std::exception ex) {
@@ -32,15 +33,15 @@ void GraphConverter::postactions()
 
             try {
                 this->writer.write(*ground);
+                BOOST_LOG_TRIVIAL(info) << "Ground truth file proccessed in batch: " << processed;
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing ground-truth file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
-            delete ground;
+            ++processed;
         }
     }
-
     BOOST_LOG_TRIVIAL(info) << "Ground truth files was processed";
 }
 
@@ -54,10 +55,11 @@ void GraphConverter::convert()
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_source())) {
         if (std::filesystem::is_regular_file(entry.path())) {
-            graph = new GraphFile(entry.path());
+            graph = new GraphFile(entry.path(), this->resource);
             try {
                 graph = dynamic_cast<GraphFile*>(reader.read(*graph));
-                graph->build_target_absolute(this->resource);
+                // graph->build_target_absolute(this->resource);
+                graph->build_target_absolute(); // try move to constructor
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
@@ -74,7 +76,6 @@ void GraphConverter::convert()
             ++processed;
         }
     }
-    delete graph;
     BOOST_LOG_TRIVIAL(info) << "Database was processed";
 }
 

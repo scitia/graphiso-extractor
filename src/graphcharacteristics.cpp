@@ -51,6 +51,16 @@ void GraphCharacteristics::set_identifier(const std::string identifier)
 
 void GraphCharacteristics::decompose_path(const std::filesystem::path path)
 {
+    std::string extension = path.extension().string();
+    if (FileIO::GTR_EXTENSION == extension) {
+        this->decompose_path_ground(path);
+    } else {
+        this->decompose_path_graph(path);
+    }
+}
+
+void GraphCharacteristics::decompose_path_graph(const std::filesystem::path path)
+{
     std::vector<std::string> filename_parts;
     boost::split(filename_parts, path.stem().string(), boost::is_any_of("_"));
 
@@ -59,4 +69,14 @@ void GraphCharacteristics::decompose_path(const std::filesystem::path path)
     this->group = filename_parts.at(1);
     this->size = filename_parts.at(2);
     this->identifier = path.extension().string().substr(2);
+}
+
+void GraphCharacteristics::decompose_path_ground(const std::filesystem::path path)
+{
+    std::vector<std::string> filename_parts;
+    boost::split(filename_parts, path.stem().string(), boost::is_any_of(FileIO::UNDERSCORE));
+
+    assert(filename_parts.size() == 2);
+    this->congruence = filename_parts.at(0);
+    this->group = filename_parts.at(1);
 }
