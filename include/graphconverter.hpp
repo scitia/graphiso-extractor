@@ -14,6 +14,7 @@
 #include "resourcelocation.hpp"
 #include "filesystemutils.hpp"
 #include "inireader.hpp"
+#include <boost/timer/progress_display.hpp>
 #include <boost/log/trivial.hpp>
 #include <filesystem>
 #include <functional>
@@ -28,6 +29,9 @@ private:
 
 public:
     GraphConverter();
+    void initially() const;
+    void finally() const;
+    void healthcheck() const;
     void preactions() const;
     void postactions();
     void convert();

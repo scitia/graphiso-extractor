@@ -1,5 +1,12 @@
 #include "groundfile.hpp"
 
+void GroundFile::validate() const
+{
+    //TODO to implement
+    // verification if adjacencies map is not empty
+    assert(!this->adjacencies.empty());
+}
+
 void GroundFile::build_target_absolute()
 {
     // std::string base_path = resource.get_target().string();
@@ -35,7 +42,8 @@ void GroundFile::build_target_absolute()
 
 std::string GroundFile::build_target_filename() const
 {
-    return "ground.txt";
+    return FileIO::DEFAULT_GROUND_FILENAME;
+    // return "gtr.txt"; // move to constants
 }
 
 const std::map<std::string, int> GroundFile::get_adjacencies() const

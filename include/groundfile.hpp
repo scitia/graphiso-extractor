@@ -16,6 +16,7 @@ public:
     GroundFile(const std::filesystem::path path) : GFile(path) {};
     GroundFile(const std::filesystem::path path, const ResourceLocation resource) : GFile(path, resource) {};
 
+    virtual void validate() const;
     virtual void build_target_absolute() override;
     virtual std::string build_target_filename() const override;
 

@@ -21,6 +21,7 @@ private:
 
 public:
 
+    static const std::string APP_TITLE;
     // platform specific constants
     static const std::string WINDOWS_SEPARATOR;
     static const std::string UNIX_SEPARATOR;
@@ -34,6 +35,7 @@ public:
     static const std::string CONFIG_DB_GROUND;
 
     // extensions, separators, etc.
+    static const std::string TXT_EXTENSION;
     static const std::string CSV_EXTENSION;
     static const std::string GTR_EXTENSION;
     static const std::string UNDERSCORE;
@@ -46,6 +48,10 @@ public:
     // graph files specific constants
     static const std::string FIRST_FROM_PAIR;
     static const std::string SECOND_FROM_PAIR;
+
+    static const std::string DEFAULT_GROUND_FILENAME;
+    static const std::string DEFAULT_BASE_FILENAME;
+    static const std::string DEFAULT_CONGRUENT_FILENAME;
 };
 
 #endif //FILE_IO_H

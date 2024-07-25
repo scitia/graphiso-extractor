@@ -7,6 +7,26 @@ GraphConverter::GraphConverter()
    this->resource.set_ground(std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_GROUND)));
 }
 
+void GraphConverter::initially() const
+{
+    std::cout << "GraphISO-Extractor by Kacper Liżewski" << "©" << std::endl;
+    std::cout << FileIO::APP_TITLE << std::endl;
+    BOOST_LOG_TRIVIAL(info) << "Starting the conversion process";
+}
+
+void GraphConverter::finally() const
+{
+    BOOST_LOG_TRIVIAL(info) << "Conversion process completed";
+}
+
+void GraphConverter::healthcheck() const
+{
+    // TODO to implement
+    // this method should be executed finally as report of whole process
+    // maybe better place is dedicated file
+    BOOST_LOG_TRIVIAL(info) << "Healthcheck was generated";
+}
+
 void GraphConverter::preactions() const
 {
     create_required_directories(this->resource.get_target());
@@ -18,7 +38,7 @@ void GraphConverter::postactions()
     reader.set_context(std::make_unique<GroundReader>());
     writer.set_context(std::make_unique<GroundWriter>());
 
-    int processed = 1;
+    boost::timer::progress_display progress_bar(84);
     GroundFile* ground;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_ground())) {
@@ -32,17 +52,17 @@ void GraphConverter::postactions()
             }
 
             try {
+                //ground->validate();
                 this->writer.write(*ground);
-                BOOST_LOG_TRIVIAL(info) << "Ground truth file proccessed in batch: " << processed;
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing ground-truth file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
-            ++processed;
+            ++progress_bar;
         }
     }
-    BOOST_LOG_TRIVIAL(info) << "Ground truth files was processed";
+    BOOST_LOG_TRIVIAL(info) << "Ground truth files were processed";
 }
 
 void GraphConverter::convert()
@@ -50,7 +70,7 @@ void GraphConverter::convert()
     reader.set_context(std::make_unique<GraphReader>());
     writer.set_context(std::make_unique<GraphWriter>());
 
-    int processed = 1;
+    boost::timer::progress_display progress_bar(145600);
     GraphFile* graph;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_source())) {
@@ -58,22 +78,21 @@ void GraphConverter::convert()
             graph = new GraphFile(entry.path(), this->resource);
             try {
                 graph = dynamic_cast<GraphFile*>(reader.read(*graph));
-                // graph->build_target_absolute(this->resource);
-                graph->build_target_absolute(); // try move to constructor
+                // graph->build_target_absolute(); // try move to constructor
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
             try {
+                //graph->validate();
                 writer.write(*graph);
-                BOOST_LOG_TRIVIAL(info) << "Graph was processed (" << processed << "/" << 145600 << ")";
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
-            ++processed;
+            ++progress_bar;
         }
     }
     BOOST_LOG_TRIVIAL(info) << "Database was processed";

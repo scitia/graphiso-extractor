@@ -28,6 +28,7 @@ public:
     virtual ~GFile() = default;
 
     // virtual void build_target_absolute(const ResourceLocation resource) = 0;
+    virtual void validate() const = 0;
     virtual void build_target_absolute() = 0;
     virtual std::string build_target_filename() const = 0;
 

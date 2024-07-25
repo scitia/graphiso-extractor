@@ -29,6 +29,11 @@ const std::string GraphCharacteristics::get_identifier() const
     return this->identifier;
 }
 
+const int GraphCharacteristics::get_nodes() const
+{
+    return this->nodes;
+}
+
 void GraphCharacteristics::set_congruence(const std::string congruence)
 {
     this->congruence = congruence;
@@ -47,6 +52,11 @@ void GraphCharacteristics::set_size(const std::string size)
 void GraphCharacteristics::set_identifier(const std::string identifier)
 {
     this->identifier = identifier;
+}
+
+void GraphCharacteristics::set_nodes(const int nodes)
+{
+    this->nodes = nodes;
 }
 
 void GraphCharacteristics::decompose_path(const std::filesystem::path path)
@@ -69,6 +79,7 @@ void GraphCharacteristics::decompose_path_graph(const std::filesystem::path path
     this->group = filename_parts.at(1);
     this->size = filename_parts.at(2);
     this->identifier = path.extension().string().substr(2);
+    this->nodes = std::stoi(this->size.substr(1));
 }
 
 void GraphCharacteristics::decompose_path_ground(const std::filesystem::path path)
