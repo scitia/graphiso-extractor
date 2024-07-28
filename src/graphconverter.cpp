@@ -21,9 +21,6 @@ void GraphConverter::finally() const
 
 void GraphConverter::healthcheck() const
 {
-    // TODO to implement
-    // this method should be executed finally as report of whole process
-    // maybe better place is dedicated file
     BOOST_LOG_TRIVIAL(info) << "Healthcheck was generated";
 }
 

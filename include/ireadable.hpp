@@ -12,5 +12,4 @@ public:
     virtual GFile* read(GFile &file) const = 0;
 };
 
-
 #endif //I_READABLE_H

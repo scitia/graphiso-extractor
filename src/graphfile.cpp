@@ -36,13 +36,7 @@ void GraphFile::build_target_absolute()
 std::string GraphFile::build_target_filename() const
 {
     std::string graph_label = std::string{this->get_path().filename().extension().string().at(1)};
-    std::string target_filename;
-    if (FileIO::FIRST_FROM_PAIR == graph_label) {
-        target_filename = FileIO::DEFAULT_BASE_FILENAME;
-    } else {
-        target_filename = FileIO::DEFAULT_CONGRUENT_FILENAME;
-    }
-    return target_filename.append(FileIO::CSV_EXTENSION);
+    return FileIO::FIRST_FROM_PAIR == graph_label ? FileIO::DEFAULT_GA_FILENAME : FileIO::DEFAULT_GB_FILENAME;
 }
 
 const arma::umat GraphFile::get_matrix() const

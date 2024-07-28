@@ -34,9 +34,9 @@ public:
     static const char* SPLIT_REGEX;
     static const std::string FIRST_FROM_PAIR;
     static const std::string SECOND_FROM_PAIR;
-    static const std::string DEFAULT_GROUND_FILENAME;
-    static const std::string DEFAULT_BASE_FILENAME;
-    static const std::string DEFAULT_CONGRUENT_FILENAME;
+    static const std::string DEFAULT_GT_FILENAME;
+    static const std::string DEFAULT_GA_FILENAME;
+    static const std::string DEFAULT_GB_FILENAME;
 };
 
 #endif //FILE_IO_H

@@ -29,7 +29,7 @@ void GroundFile::build_target_absolute()
 
 std::string GroundFile::build_target_filename() const
 {
-    return FileIO::DEFAULT_GROUND_FILENAME;
+    return FileIO::DEFAULT_GT_FILENAME;
 }
 
 const std::map<std::string, int> GroundFile::get_adjacencies() const

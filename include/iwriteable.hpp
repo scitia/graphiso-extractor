@@ -12,5 +12,4 @@ public:
     virtual bool write(GFile &file) const = 0;
 };
 
-
 #endif //I_WRITEABLE_H

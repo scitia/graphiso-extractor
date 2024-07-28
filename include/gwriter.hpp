@@ -17,5 +17,4 @@ public:
     bool write(GFile &file) const;
 };
 
-
 #endif //G_WRITER_H

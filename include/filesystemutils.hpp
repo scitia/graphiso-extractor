@@ -14,5 +14,4 @@ public:
     static bool create_directories(std::filesystem::path path);
 };
 
-
 #endif //FILESYSTEM_UTILS_H

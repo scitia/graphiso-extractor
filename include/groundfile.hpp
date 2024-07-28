@@ -25,5 +25,4 @@ public:
     void set_adjacencies(std::map<std::string, int> adjacencies);
 };
 
-
 #endif //GROUND_FILE_H
