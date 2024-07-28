@@ -7,6 +7,6 @@ void Application::run()
     converter.preactions();
     converter.convert();
     converter.postactions();
-    // converter.healthcheck();
+    converter.healthcheck();
     converter.finally();
 }

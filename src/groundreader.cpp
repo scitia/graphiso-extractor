@@ -6,7 +6,7 @@ GFile* GroundReader::read(GFile &file) const
     std::map<std::string, int> ground_content;
 
     std::string ground_filename = std::filesystem::absolute(file.get_path()).string();
-    // old version: file.get_path().filename().string()
+    
     ground_file_stream.open(ground_filename, std::ios::in);
     if (ground_file_stream.is_open()) {
         

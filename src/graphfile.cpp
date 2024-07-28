@@ -2,9 +2,6 @@
 
 void GraphFile::validate() const
 {
-    //TODO to implement
-    // validation of graph file
-    // verification if amount of declared in filename nodes is consistent with matrix size
     assert(this->get_matrix().n_cols == this->get_matrix().n_rows);
     assert(this->get_characteristics().get_nodes() == this->get_matrix().n_rows);
 }
@@ -38,15 +35,6 @@ void GraphFile::build_target_absolute()
 
 std::string GraphFile::build_target_filename() const
 {
-    // std::vector<std::string> filename_parts = {
-    //     this->get_characteristics().get_congruence(),
-    //     this->get_characteristics().get_group(),
-    //     this->get_characteristics().get_size(),
-    //     this->get_path().filename().extension().string().substr(1)
-    // };
-
-    // return boost::algorithm::join(filename_parts, FileIO::UNDERSCORE).append(FileIO::CSV_EXTENSION);
-
     std::string graph_label = std::string{this->get_path().filename().extension().string().at(1)};
     std::string target_filename;
     if (FileIO::FIRST_FROM_PAIR == graph_label) {

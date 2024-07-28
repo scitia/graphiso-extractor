@@ -6,13 +6,13 @@
 #include "gfile.hpp"
 #include <map>
 
-class GroundFile : public GFile//, public ITargetable
+class GroundFile : public GFile
 {
 private:
     std::map<std::string, int> adjacencies;
 
 public:
-    GroundFile() {}; // to delete after full implementation
+    GroundFile() {};
     GroundFile(const std::filesystem::path path) : GFile(path) {};
     GroundFile(const std::filesystem::path path, const ResourceLocation resource) : GFile(path, resource) {};
 

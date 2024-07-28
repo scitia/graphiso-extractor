@@ -5,7 +5,6 @@ bool GroundWriter::write(GFile &file) const
     GroundFile* ground = dynamic_cast<GroundFile*>(&file);
 
     std::map<std::string, int> adjacencies = ground->get_adjacencies();
-    assert(!adjacencies.empty()); // this code should be moved to abstact validate method
 
     for (const auto& [filename, adj_amount] : ground->get_adjacencies()) {
         set_details(*ground, filename);
@@ -19,14 +18,11 @@ bool GroundWriter::write(GFile &file) const
 
 void GroundWriter::set_details(GroundFile &file, std::string filename) const
 {
-    // prepare method set characteristics
     std::pair<std::string, std::string> decomposed = decompose_filename(filename);
     GraphCharacteristics temp_characteristics = file.get_characteristics();
     temp_characteristics.set_size(decomposed.first);
     temp_characteristics.set_identifier(decomposed.second);
     file.set_characteristics(temp_characteristics);
-    // file.get_characteristics().set_size(decomposed.first);
-    // file.get_characteristics().set_identifier(decomposed.second);
     file.build_target_absolute();
 }
 

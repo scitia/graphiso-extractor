@@ -5,7 +5,7 @@
 
 #include "groundfile.hpp"
 #include "iwriteable.hpp"
-#include <utility> // contains pair
+#include <utility>
 
 class GroundWriter : public IWriteable
 {

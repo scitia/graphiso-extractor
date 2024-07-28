@@ -21,7 +21,7 @@ private:
 
 public:
     // constructors
-    GraphCharacteristics();
+    GraphCharacteristics() {};
     GraphCharacteristics(const std::filesystem::path filepath);
 
     // getters

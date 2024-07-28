@@ -1,9 +1,5 @@
 #include "graphcharacteristics.hpp"
 
-GraphCharacteristics::GraphCharacteristics()
-{
-}
-
 GraphCharacteristics::GraphCharacteristics(const std::filesystem::path filepath)
 {
     this->decompose_path(filepath);

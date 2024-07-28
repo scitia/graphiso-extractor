@@ -2,19 +2,13 @@
 
 void GroundFile::validate() const
 {
-    //TODO to implement
-    // verification if adjacencies map is not empty
     assert(!this->adjacencies.empty());
 }
 
 void GroundFile::build_target_absolute()
 {
-    // std::string base_path = resource.get_target().string();
     std::filesystem::path resource_target = this->get_resource().get_target();
     std::filesystem::path resource_source = this->get_resource().get_ground();
-    std::string s_resource_target = std::filesystem::absolute(this->get_resource().get_target()).string();
-    std::string s_resource_source = std::filesystem::absolute(this->get_resource().get_source()).string();
-    std::string s_parent_path = std::filesystem::absolute(this->get_path().parent_path()).string();
 
     std::string relative_path = this->relative_toward(resource_source).string();
 
@@ -30,20 +24,12 @@ void GroundFile::build_target_absolute()
         .append(build_target_filename())
     );
 
-    // std::string target_filename = build_target_filename();
-
-    // target_path
-    //     .append(FileIO::UNIX_SEPARATOR)
-    //     .append(target_filename);
-
-    // std::filesystem::path tp = std::filesystem::path(target_path);
     this->set_target_path(target_path);
 }
 
 std::string GroundFile::build_target_filename() const
 {
     return FileIO::DEFAULT_GROUND_FILENAME;
-    // return "gtr.txt"; // move to constants
 }
 
 const std::map<std::string, int> GroundFile::get_adjacencies() const

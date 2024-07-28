@@ -9,7 +9,7 @@ GraphConverter::GraphConverter()
 
 void GraphConverter::initially() const
 {
-    std::cout << "GraphISO-Extractor by Kacper Liżewski" << "©" << std::endl;
+    std::cout << "GraphISO-Extractor by Kacper Liżewski©" << std::endl;
     std::cout << FileIO::APP_TITLE << std::endl;
     BOOST_LOG_TRIVIAL(info) << "Starting the conversion process";
 }
@@ -52,7 +52,6 @@ void GraphConverter::postactions()
             }
 
             try {
-                //ground->validate();
                 this->writer.write(*ground);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing ground-truth file";
@@ -78,14 +77,12 @@ void GraphConverter::convert()
             graph = new GraphFile(entry.path(), this->resource);
             try {
                 graph = dynamic_cast<GraphFile*>(reader.read(*graph));
-                // graph->build_target_absolute(); // try move to constructor
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during reading graph file";
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
             try {
-                //graph->validate();
                 writer.write(*graph);
             } catch (std::exception ex) {
                 BOOST_LOG_TRIVIAL(error) << "An error occured during writing graph file";
