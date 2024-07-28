@@ -24,4 +24,4 @@ const std::string FileIO::FIRST_FROM_PAIR = "A";
 const std::string FileIO::SECOND_FROM_PAIR = "B";
 const std::string FileIO::DEFAULT_GA_FILENAME = "ga.csv";
 const std::string FileIO::DEFAULT_GB_FILENAME = "gb.csv";
-const std::string FileIO::DEFAULT_GT_FILENAME = "gt.csv";
+const std::string FileIO::DEFAULT_GT_FILENAME = "gt.txt";
