@@ -1,7 +1,7 @@
 # Graphiso-Extractor
 
 <div style="display:flex;justify-content: center;align-items: center;">
-<img src="scitia_logo.png" alt="Logo of K!Scithia">
+<img src="doc/img/scitia_logo.png" alt="Logo of K!Scithia">
 </div>
 
 ## Table of contents
