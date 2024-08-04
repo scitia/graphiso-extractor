@@ -1,5 +1,8 @@
 #include "graphconverter.hpp"
 
+const int GraphConverter::GRAPHS_VOLUME = 145600;
+const int GraphConverter::DIR_VOLUME = 84;
+
 GraphConverter::GraphConverter()
 {
    this->resource.set_source(std::filesystem::path(this->config.read_property(FileIO::CONFIG_DB_SOURCE)));
@@ -9,7 +12,7 @@ GraphConverter::GraphConverter()
 
 void GraphConverter::initially() const
 {
-    std::cout << "GraphISO-Extractor by Kacper Liżewski©" << std::endl;
+    std::cout << std::endl << "GraphISO-Extractor by Kacper Liżewski©" << std::endl;
     std::cout << FileIO::APP_TITLE << std::endl;
     BOOST_LOG_TRIVIAL(info) << "Starting the conversion process";
 }
@@ -35,7 +38,9 @@ void GraphConverter::postactions()
     reader.set_context(std::make_unique<GroundReader>());
     writer.set_context(std::make_unique<GroundWriter>());
 
-    boost::timer::progress_display progress_bar(84);
+    progressbar progress(DIR_VOLUME);
+    GlobalUtils::spc(progress);
+
     GroundFile* ground;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_ground())) {
@@ -55,10 +60,10 @@ void GraphConverter::postactions()
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
-            ++progress_bar;
+            progress.update();
         }
     }
-    BOOST_LOG_TRIVIAL(info) << "Ground truth files were processed";
+    BOOST_LOG_TRIVIAL(info) << std::endl << "Ground truth files were processed";
 }
 
 void GraphConverter::convert()
@@ -66,7 +71,9 @@ void GraphConverter::convert()
     reader.set_context(std::make_unique<GraphReader>());
     writer.set_context(std::make_unique<GraphWriter>());
 
-    boost::timer::progress_display progress_bar(145600);
+    progressbar progress(GRAPHS_VOLUME);
+    GlobalUtils::spc(progress);
+
     GraphFile* graph;
 
     for (const auto& entry : std::filesystem::recursive_directory_iterator(this->resource.get_source())) {
@@ -86,10 +93,10 @@ void GraphConverter::convert()
                 BOOST_LOG_TRIVIAL(error) << ex.what();
             }
 
-            ++progress_bar;
+            progress.update();
         }
     }
-    BOOST_LOG_TRIVIAL(info) << "Database was processed";
+    BOOST_LOG_TRIVIAL(info) << std::endl << "Database was processed";
 }
 
 void GraphConverter::create_required_directories(std::filesystem::path path) const
