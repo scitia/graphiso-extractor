@@ -11,7 +11,7 @@ REM
 cd /d "%BUILD_DIR%"
 
 REM
-cmake "%SOURCE_DIR%"
+cmake .. -G "MinGW Makefiles"
 
 REM
 cmake --build .
@@ -19,6 +19,3 @@ cmake --build .
 REM
 REM
 "%BUILD_DIR%\graphiso-extractor.exe"
-
-REM
-pause

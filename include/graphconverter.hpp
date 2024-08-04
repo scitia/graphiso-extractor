@@ -14,7 +14,8 @@
 #include "resourcelocation.hpp"
 #include "filesystemutils.hpp"
 #include "inireader.hpp"
-#include <boost/timer/progress_display.hpp>
+#include "globalutils.hpp"
+#include "progressbar.hpp"
 #include <boost/log/trivial.hpp>
 #include <filesystem>
 #include <functional>
@@ -36,6 +37,8 @@ public:
     void postactions();
     void convert();
 private:
+    static const int GRAPHS_VOLUME;
+    static const int DIR_VOLUME;
     void create_required_directories(std::filesystem::path path) const;
 };
 
