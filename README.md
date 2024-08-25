@@ -204,6 +204,7 @@ Generated resource contains 4 directories:
 ```
 
 Each of them has the same structure as follows:
+<details>
 
 ```bash
 .
@@ -417,6 +418,9 @@ Each of them has the same structure as follows:
         └── s80
 ```
 
+</details>
+<br>
+
 Each leaf on above tree has 100 directires inside named 00-99 and evey of them has tree files:
 
 ```bash
@@ -481,11 +485,15 @@ An example pair of two isomorphic graphs and vertex maping between them as a map
 
 <img src="doc/img/iso_draw.png" alt="Examples graph and vertex mapping">
 
-I encourage you to use my dedicated python <a href="https://github.com/scitia/graphs"><b>library</b></a> to deal with graphs and automates processing these structures. <b style="color: #d12a2a">Use this installation only if you need to possess files locally on your computer to speed up processing in your researches.</b> 
+I encourage you to use my dedicated python <a href="https://github.com/scitia/graphs"><b>library</b></a> (works in progress) to deal with graphs and automates processing these structures. <b style="color: #d12a2a">Use this installation only if you need to possess files locally on your computer to speed up processing in your researches.</b> 
 
 ### Summary <a name="summary"></a>
 
 There are in plans to set up the FTP server to share all generated files. This documentation will be completed in the future.
+
+**I am not responsible for the completeness and correctness of the data. The source files were not modified in any way.**
+
+Nevertheless it will be nice I you report any bugs or problems.
 
 ### References <a name="references"></a>
 
