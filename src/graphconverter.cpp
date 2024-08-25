@@ -24,6 +24,7 @@ void GraphConverter::finally() const
 
 void GraphConverter::healthcheck() const
 {
+    //TODO report of data completeness
     BOOST_LOG_TRIVIAL(info) << "Healthcheck was generated";
 }
 
