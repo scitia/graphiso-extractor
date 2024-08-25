@@ -205,6 +205,7 @@ Generated resource contains 4 directories:
 
 Each of them has the same structure as follows:
 <details>
+<summary>Expand to see details</summary>
 
 ```bash
 .
