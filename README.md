@@ -10,7 +10,7 @@
     - [Introduction ](#introduction-)
     - [Prerequisite ](#prerequisite-)
     - [Database Description ](#database-description-)
-    - [Downloads](#downloads)
+    - [Downloads ](#downloads-)
     - [Instalation ](#instalation-)
     - [Structure ](#structure-)
     - [Examples of use ](#examples-of-use-)
@@ -150,7 +150,7 @@ Below there there are listed types of the graphs in database:
 </table>
 The table above presents graphs generated for the isomorphism case.
 
-### Downloads
+### Downloads <a name="downloads"></a>
 
 Due to the fact that project installation is highly platform dependent, here you can directly download files (converted as well as original).
 
