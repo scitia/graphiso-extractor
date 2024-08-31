@@ -10,6 +10,7 @@
     - [Introduction ](#introduction-)
     - [Prerequisite ](#prerequisite-)
     - [Database Description ](#database-description-)
+    - [Downloads](#downloads)
     - [Instalation ](#instalation-)
     - [Structure ](#structure-)
     - [Examples of use ](#examples-of-use-)
@@ -148,6 +149,18 @@ Below there there are listed types of the graphs in database:
 </tr>
 </table>
 The table above presents graphs generated for the isomorphism case.
+
+### Downloads
+
+Due to the fact that project installation is highly platform dependent, here you can directly download files (converted as well as original).
+
+But still feel free to use this code if want.
+
+<a href="https://drive.google.com/file/d/15rvTVlAcEbyQQkcanH-fQjmrCvQ5zhbv/view?usp=drive_link"><b>[Original files]</b></a>
+<a href="https://drive.google.com/file/d/1JVzOqSS_jRGJ23IPEmJJ9kiDH1QBfvs9/view?usp=drive_link"><b>[Converted database]</b></a>
+
+**Hardware requirements:**
+To unzip covnerted files you will need **50GB** free space on your disk.
 
 ### Instalation <a name="install"></a>
 
