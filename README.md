@@ -1,8 +1,10 @@
 # Graphiso-Extractor
 
-<div style="display:flex;justify-content: center;align-items: center;">
-<img src="doc/img/scitia_logo.png" alt="Logo of K!Scithia">
-</div>
+<span align="center">
+  <pre>
+    <img src="doc/img/graphiso-extractor.png" alt="Logo of K!Scithia" height="400">
+  </pre>
+</span>
 
 ## Table of contents
 - [Graphiso-Extractor](#graphiso-extractor)
